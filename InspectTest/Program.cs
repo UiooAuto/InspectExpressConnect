@@ -10,20 +10,6 @@ namespace InspectTest
     {
         static void Main(string[] args)
         {
-            /*
-             //IP地址的ping测试
-             Ping ping = new Ping();
-            PingReply pingReply = ping.Send("39.156.66.19");
-            if (pingReply.Status ==IPStatus.Success)
-            {
-                Console.WriteLine("Ping Success");
-            }
-            else
-            {
-                Console.WriteLine("Ping Fail");
-            }
-
-            Console.ReadKey();*/
             var serverIp = "127.0.0.1";
             var serverPort = 5024;
             var cmd = "StartInspect;";
@@ -34,6 +20,7 @@ namespace InspectTest
 
             while (true)
             {
+                var cmdToInspect = sendCmdToInspect(socket,"cmd1;");
                 var dataFromInspect = receiveDataFromInspect(socket,resBytes);
                 Console.WriteLine(dataFromInspect);
             }
