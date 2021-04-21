@@ -17,20 +17,20 @@ namespace InspectTest
             var recStr = "";
 
             var socket = connectToInspect(serverIp, serverPort);
-            /*while (true)
+            while (true)
             {
-                sendCmdToInspect(socket, "start");
+                var cmdToInspect = sendCmdToInspect(socket, "start;");
                 var dataFromInspect = receiveDataFromInspect(socket, resBytes);
                 Console.WriteLine(dataFromInspect);
-            }*/
+            }
 
 
-            while (true)
+            /*while (true)
             {
                 var cmdToInspect = sendCmdToInspect(socket,"cmd;");
                 var dataFromInspect = receiveDataFromInspect(socket,resBytes);
                 Console.WriteLine(dataFromInspect);
-            }
+            }*/
         }
 
         
