@@ -1,0 +1,16 @@
+D:\XXYwork\riderTest\InspectTest\InspectTest\bin\Debug\net5.0\InspectTest.exe
+D:\XXYwork\riderTest\InspectTest\InspectTest\bin\Debug\net5.0\InspectTest.deps.json
+D:\XXYwork\riderTest\InspectTest\InspectTest\bin\Debug\net5.0\InspectTest.runtimeconfig.json
+D:\XXYwork\riderTest\InspectTest\InspectTest\bin\Debug\net5.0\InspectTest.runtimeconfig.dev.json
+D:\XXYwork\riderTest\InspectTest\InspectTest\bin\Debug\net5.0\InspectTest.dll
+D:\XXYwork\riderTest\InspectTest\InspectTest\bin\Debug\net5.0\ref\InspectTest.dll
+D:\XXYwork\riderTest\InspectTest\InspectTest\bin\Debug\net5.0\InspectTest.pdb
+D:\XXYwork\riderTest\InspectTest\InspectTest\obj\Debug\net5.0\InspectTest.csprojAssemblyReference.cache
+D:\XXYwork\riderTest\InspectTest\InspectTest\obj\Debug\net5.0\InspectTest.GeneratedMSBuildEditorConfig.editorconfig
+D:\XXYwork\riderTest\InspectTest\InspectTest\obj\Debug\net5.0\InspectTest.AssemblyInfoInputs.cache
+D:\XXYwork\riderTest\InspectTest\InspectTest\obj\Debug\net5.0\InspectTest.AssemblyInfo.cs
+D:\XXYwork\riderTest\InspectTest\InspectTest\obj\Debug\net5.0\InspectTest.csproj.CoreCompileInputs.cache
+D:\XXYwork\riderTest\InspectTest\InspectTest\obj\Debug\net5.0\InspectTest.dll
+D:\XXYwork\riderTest\InspectTest\InspectTest\obj\Debug\net5.0\ref\InspectTest.dll
+D:\XXYwork\riderTest\InspectTest\InspectTest\obj\Debug\net5.0\InspectTest.pdb
+D:\XXYwork\riderTest\InspectTest\InspectTest\obj\Debug\net5.0\InspectTest.genruntimeconfig.cache
