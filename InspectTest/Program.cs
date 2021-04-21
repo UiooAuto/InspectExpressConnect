@@ -24,60 +24,145 @@ namespace InspectTest
             }
 
             Console.ReadKey();*/
-            var serverIP = "127.0.0.1";
-            var serverPORT = 5024;
-            var cmd = "cmd;";
+            var serverIp = "127.0.0.1";
+            var serverPort = 5024;
+            var cmd = "StartInspect;";
             byte[] resBytes = new byte[1024];
             var recStr = "";
 
-            var ip = IPAddress.Parse(ipString: serverIP);
-
-            Socket clientSocket = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
-
-            try
-            {
-                clientSocket.Connect(new IPEndPoint(ip, serverPORT));
-            }
-            catch (Exception e)
-            {
-                Console.WriteLine(e);
-            }
-
-            Console.WriteLine("连接成功");
-            Console.WriteLine("__________");
-
-            try
-            {
-                var sendBytes = Encoding.UTF8.GetBytes(cmd);
-                clientSocket.Send(buffer: sendBytes);
-
-                Console.WriteLine("Send Over");
-
-                int bytes = clientSocket.Receive(resBytes, resBytes.Length, 0);
-                recStr += Encoding.UTF8.GetString(resBytes, 0, bytes);
-                Console.WriteLine("RecOver");
-            }
-            catch (Exception e)
-            {
-                Console.WriteLine(e);
-            }
+            var socket = connectToInspect(serverIp, serverPort);
 
             while (true)
             {
-                var sendBytes1 = Encoding.UTF8.GetBytes(cmd);
-                clientSocket.Send(buffer: sendBytes1);
-
-                Console.WriteLine("Send Over");
-                
-                recStr = "";
-                int bytes1 = clientSocket.Receive(resBytes, resBytes.Length, 0);
-                recStr += Encoding.UTF8.GetString(resBytes, 0, bytes1);
-                Console.WriteLine(recStr);
+                var dataFromInspect = receiveDataFromInspect(socket,resBytes);
+                Console.WriteLine(dataFromInspect);
             }
+        }
 
+        
+        /*
+         * 用于连接Inspect软件
+         */
+        public static Socket connectToInspect(string serverIp, int serverPort)
+        {
+            IPAddress ipAddress;
+            Socket socket;
+            if (serverIp != null && serverPort != 0)
+            {
+                ipAddress = IPAddress.Parse(serverIp);
+                socket = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
 
-            Console.WriteLine(recStr);
-            Console.ReadKey();
+                try
+                {
+                    socket.Connect(new IPEndPoint(ipAddress, serverPort));
+                }
+                catch (Exception e)
+                {
+                    Console.WriteLine(e);
+                    return null;
+                }
+
+                return socket;
+            }
+            else
+            {
+                return null;
+            }
+        }
+
+        /*
+         * 用于向Inspect发送指令
+         */
+        public static string sendCmdToInspect(string serverIP, int serverPORT, string cmd)
+        {
+            Socket socket;
+            var cmdBytes = Encoding.UTF8.GetBytes(cmd);
+            if (serverIP != null && serverPORT != 0 & cmd != null)
+            {
+                socket = connectToInspect(serverIP,serverPORT);
+                if (socket == null)
+                {
+                    return "Connect_Fail";
+                }
+                try
+                {
+                    socket.Send(cmdBytes);
+                }
+                catch (Exception e)
+                {
+                    Console.WriteLine(e);
+                    return "send_Fail";
+                }
+                return "Send_Successful";
+            }
+            return "Parameter_Null";
+        }
+        public static string sendCmdToInspect(Socket socket, string cmd)
+        {
+            var cmdBytes = Encoding.UTF8.GetBytes(cmd);
+            if (socket!= null & cmd != "")
+            {
+                try
+                {
+                    socket.Send(cmdBytes);
+                }
+                catch (Exception e)
+                {
+                    Console.WriteLine(e);
+                    return "send_Fail";
+                }
+                return "Send_Successful";
+            }
+            return "Parameter_Null";
+        }
+        
+        
+        /*
+         * 用于从Inspect接收数据
+         */
+        public static string receiveDataFromInspect(string serverIp, int serverPort, byte[] recBytes)
+        {
+            Socket socket;
+            string recStr = "";
+            if (serverIp != null && serverPort != 0 & recBytes != null)
+            {
+                socket = connectToInspect(serverIp,serverPort);
+                if (socket == null)
+                {
+                    return "Connect_Fail";
+                }
+                try
+                {
+                    var receiveCode = socket.Receive(recBytes,recBytes.Length,0);
+                    recStr += Encoding.UTF8.GetString(recBytes,0,receiveCode);
+                }
+                catch (Exception e)
+                {
+                    Console.WriteLine(e);
+                    return "Receive_Fail";
+                }
+                return "Receive_Successful";
+            }
+            return "Parameter_Null";
+        }
+        public static string receiveDataFromInspect(Socket socket,byte[] recBytes)
+        {
+            string recStr = "";
+            if (socket!=null&recBytes != null)
+            {
+                try
+                {
+                    var receiveCode = socket.Receive(recBytes,recBytes.Length,0);
+                    recStr += Encoding.UTF8.GetString(recBytes,0,receiveCode);
+                }
+                catch (Exception e)
+                {
+                    Console.WriteLine(e);
+                    return "Receive_Fail";
+                }
+                return recStr;
+            }
+            return "Parameter_Null";
         }
     }
 }
