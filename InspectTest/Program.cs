@@ -17,10 +17,17 @@ namespace InspectTest
             var recStr = "";
 
             var socket = connectToInspect(serverIp, serverPort);
+            /*while (true)
+            {
+                sendCmdToInspect(socket, "start");
+                var dataFromInspect = receiveDataFromInspect(socket, resBytes);
+                Console.WriteLine(dataFromInspect);
+            }*/
+
 
             while (true)
             {
-                var cmdToInspect = sendCmdToInspect(socket,"cmd1;");
+                var cmdToInspect = sendCmdToInspect(socket,"cmd;");
                 var dataFromInspect = receiveDataFromInspect(socket,resBytes);
                 Console.WriteLine(dataFromInspect);
             }
@@ -55,6 +62,14 @@ namespace InspectTest
             {
                 return null;
             }
+        }
+        
+        /*
+         用于关闭连接
+         */
+        public static void shutDownInspect(Socket socket)
+        {
+            socket.Shutdown(SocketShutdown.Both);
         }
 
         /*
